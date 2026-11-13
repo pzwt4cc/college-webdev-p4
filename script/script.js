@@ -20,30 +20,34 @@ formAnswers.innerHTML = `
   </div>
 `;
 
-const check = () => {
-  if (numberQuestion === 0) {
-    prevBtn.style.display = "none";
-  } else if (numberQuestion > 0) {
-    prevBtn.style.display = "inline-block";
-  }
+const renderQuestion = () => {
+  switch (numberQuestion) {
+    case 0:
+      prevBtn.style.display = "none";
+      nextBtn.style.display = "inline-block";
+      break;
 
-  if (numberQuestion === questions.length - 1) {
-    nextBtn.style.display = "none";
-  } else {
-    nextBtn.style.display = "inline-block";
+    case questions.length - 1:
+      prevBtn.style.display = "inline-block";
+      nextBtn.style.display = "none";
+      break;
+
+    default:
+      prevBtn.style.display = "inline-block";
+      nextBtn.style.display = "inline-block";
   }
 };
 
-check();
+renderQuestion();
 
 nextBtn.onclick = () => {
   numberQuestion++;
-  check();
+  renderQuestion();
 };
 
 prevBtn.onclick = () => {
   numberQuestion--;
-  check();
+  renderQuestion();
 };
 
 btnOpenModal.addEventListener("click", () => {
